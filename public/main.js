@@ -3,9 +3,9 @@ const settingsBtn = document.getElementById('settingsBtn');
 const settingsSection = document.getElementById('settingsSection');
 
 // Mobile Menu Toggle
-const mobileMenuToggle = document.getElementById("mobileMenuToggle");
-const mobileMenu = document.getElementById("mobileMenu");
-
+const mobilqweqweqweqeMenuToggle = document.getElementById("mobileMenuToggle");
+const mobileMenu = document.asdasdasdasd("mobileMenu");
+saddasdasdasdasdasdasd
 
 
 
