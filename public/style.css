@@ -1,0 +1,80 @@
+.slider {
+    height: 0px;
+    top: 0;
+    overflow: hidden;
+    transition: height 1s ease;
+    -moz-transition: height 0.5s ease;
+    -ms-transition: height 0.5s ease;
+    -o-transition: height 0.5s ease;
+    -webkit-transition: height 0.5s ease;
+  }
+  
+  .slided {
+    height: 100%;
+  }
+
+  .addFriend{
+    margin: 15px;
+    text-align: center;
+    font-size: 18px;
+    border-radius: 10px;
+    background-color:rgba(75, 85, 99, var(--tw-bg-opacity));
+    color: rgba(255, 255, 255, 0.596);
+  }
+  .addFriend:hover{
+    background-color: rgba(107, 114, 128, var(--tw-bg-opacity));
+  }
+
+  .window{
+    position: fixed;
+    margin-left: 26%;
+    margin-top: 18%;
+    width: 400px;
+    height: 170px;
+    font-size: larger;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+    padding: 20px;
+    text-align: center;
+  }
+
+
+  .window>form>*{
+    font-size: 30px;
+    margin-top: 20px;
+  }
+
+  .closeButton{
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    right: 5px;
+    top: 5px;
+  }
+
+
+  /* width */
+::-webkit-scrollbar {
+  width: 16px;
+  height: 16px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 100vh;
+  background: #edf2f7;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #cbd5e0;
+  border-radius: 100vh;
+  border: 3px solid #edf2f7;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #a0aec0;
+}
+  
