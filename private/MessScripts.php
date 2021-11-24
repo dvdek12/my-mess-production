@@ -88,9 +88,8 @@ function showMessagesWithUser($receiverId,$senderId,$conn){
                             <p class="text-sm">'.$row["text"].'</p>
                         </div>
                         </div>
-                        
                         ';
-
+                        $last = "notYou";
                     }
                     else 
                     {
@@ -102,9 +101,36 @@ function showMessagesWithUser($receiverId,$senderId,$conn){
                         <img src="profPics/'.profPicPath($receiverId,$conn).'" alt="" class="w-8 h-8 self-start">
                         </div>
                         ';
-
+                        $last = "you";
                     }
-                  }
+                }
+                if($last == "you"){
+                    $sql = "SELECT ifRead FROM conversations WHERE id_sender='".$receiverId."' AND id_user='".$senderId."'";
+
+                    if($result = @$conn->query($sql)){
+                
+                        $howManyRows = $result->num_rows;
+                
+                        if($howManyRows>0){
+                            $row = $result->fetch_assoc();
+                            if($row["ifRead"]==1){
+                            echo '<div class="inline-flex items-center space-x-3 place-self-end">
+                                <img style="margin-top: -60px" src="../public/assets/read.png" class="w-6 h-6">
+                                </div>';
+                            }
+                            else{
+                                echo '<div class="inline-flex items-center space-x-3 place-self-end">
+                                <img style="margin-top: -70px" src="../public/assets/notRead.png" class="w-6 h-6">
+                                </div>';
+                            }
+                        }
+                    }
+                }
+                else{
+                    echo '<div class="inline-flex items-center space-x-3">
+                            <img style="margin-top: -80px" src="../public/assets/read.png" class="w-6 h-6">
+                        </div>';
+                }
             }
         }
         return $howManyRows;
