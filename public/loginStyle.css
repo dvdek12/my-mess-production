@@ -2,6 +2,37 @@ body {
     background-color: #f45b69;
     font-family: "Asap", sans-serif;
   }
+
+  #register{
+    overflow: hidden;
+    background-color: white;
+    padding: 10px 30px 30px 30px;
+    border-radius: 10px;
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    width: 400px;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    -webkit-transition: -webkit-transform 300ms, box-shadow 300ms;
+    -moz-transition: -moz-transform 300ms, box-shadow 300ms;
+    transition: transform 300ms, box-shadow 300ms;
+    box-shadow: 5px 10px 10px rgba(2, 128, 144, 0.2);
+  }
+  .register > input {
+    font-family: "Asap", sans-serif;
+    display: block;
+    border-radius: 5px;
+    font-size: 16px;
+    background: rgb(221, 221, 221);
+    width: 100%;
+    border: 0;
+    padding: 10px 10px;
+    margin: 15px -10px;
+  }
   
   .login {
     overflow: hidden;
@@ -9,7 +40,7 @@ body {
     padding: 40px 30px 30px 30px;
     border-radius: 10px;
     position: absolute;
-    top: 50%;
+    top: 30%;
     left: 50%;
     width: 400px;
     -webkit-transform: translate(-50%, -50%);
@@ -60,13 +91,13 @@ body {
     padding: 10px 10px;
     margin: 15px -10px;
   }
-  .login > button {
+  button {
     font-family: "Asap", sans-serif;
     cursor: pointer;
     color: #fff;
-    font-size: 16px;
+    font-size: 15px;
     text-transform: uppercase;
-    width: 80px;
+    width: 100px;
     border: 0;
     padding: 10px 0;
     margin-top: 10px;
@@ -77,7 +108,7 @@ body {
     -moz-transition: background-color 300ms;
     transition: background-color 300ms;
   }
-  .login > button:hover {
+  button:hover {
     background-color: #f24353;
   }
   
@@ -115,9 +146,9 @@ body {
   }
   a {
     text-decoration: none;
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(255, 255, 255, 0.767);
     position: absolute;
     right: 10px;
     bottom: 10px;
-    font-size: 12px;
+    font-size: 17px;
   }
