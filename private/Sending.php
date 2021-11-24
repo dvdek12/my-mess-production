@@ -12,7 +12,7 @@ session_start();
     }
     else
     {
-    $sql = "INSERT INTO messages(id_receiver, id_sender, text) VALUES ('".$_SESSION["who"]."', '".$_SESSION["userId"]."' ,'".$_POST["text"]."')";
+    $sql = "INSERT INTO messages(id_receiver, id_sender, text) VALUES ('".$_SESSION["who"]."', '".$_SESSION["userId"]."' ,'".strip_tags($_POST["text"])."')";
 
     $conn1 -> query($sql);
 
