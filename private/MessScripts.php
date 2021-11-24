@@ -67,7 +67,7 @@ function showMessages($receiverId,$senderId,$conn){
 function showMessagesWithUser($receiverId,$senderId,$conn){
 
     
-        $sql = "SELECT id_sender, id_receiver, text FROM messages
+        $sql = "SELECT id, id_sender, id_receiver, sendDate, text FROM messages
                 WHERE id_sender = '".$senderId."' AND id_receiver = '".$receiverId."'
                 OR id_sender = '".$receiverId."' AND id_receiver = '".$senderId."'";
 
@@ -84,9 +84,10 @@ function showMessagesWithUser($receiverId,$senderId,$conn){
                         echo '
                         <div class="inline-flex items-center space-x-3">
                         <img src="profPics/'.profPicPath($senderId,$conn).'" alt="" class="w-8 h-8 self-start">
-                        <div class="w-auto p-4 bg-gray-700 text-white font-semibold rounded-2xl h-auto shadow-xl self-start">
+                        <div onclick="showMessageInfo('.$row["id"].')" class="w-auto p-4 bg-gray-700 text-white font-semibold rounded-2xl h-auto shadow-xl self-start">
                             <p class="text-sm">'.$row["text"].'</p>
-                        </div>
+                            </div>
+                            <div id="ms'.$row["id"].'" style="display: none">'.$row["sendDate"].'</div>
                         </div>
                         ';
                         $last = "notYou";
@@ -95,7 +96,8 @@ function showMessagesWithUser($receiverId,$senderId,$conn){
                     {
                         echo '
                         <div class="inline-flex items-center space-x-3 place-self-end"> <!-- prawa -->
-                        <div class="w-auto p-4 bg-purple-700 text-white font-semibold rounded-2xl h-auto shadow-xl self-start">
+                        <div id="ms'.$row["id"].'" style="display: none">'.$row["sendDate"].'</div>
+                        <div onclick="showMessageInfo('.$row["id"].')" class="w-auto p-4 bg-purple-700 text-white font-semibold rounded-2xl h-auto shadow-xl self-start">
                             <p class="text-sm">'.$row["text"].'</p>
                         </div>
                         <img src="profPics/'.profPicPath($receiverId,$conn).'" alt="" class="w-8 h-8 self-start">
@@ -139,7 +141,7 @@ function showMessagesWithUser($receiverId,$senderId,$conn){
 function showMessagesWithGroup($receiverId,$senderId,$conn){
 
     
-    $sql = "SELECT id_sender, id_receiver, text FROM messages
+    $sql = "SELECT id, sendDate, id_sender, id_receiver, text FROM messages
             WHERE id_sender = '".$senderId."' or id_receiver = '".$senderId."'";
 
     if($result = @$conn->query($sql)){
@@ -155,9 +157,10 @@ function showMessagesWithGroup($receiverId,$senderId,$conn){
                     echo '
                     <div class="inline-flex items-center space-x-3">
                     <img src="profPics/'.profPicPath($row["id_sender"],$conn).'" alt="" class="w-8 h-8 self-start">
-                    <div class="w-auto p-4 bg-gray-700 text-white font-semibold rounded-2xl h-auto shadow-xl self-start">
+                    <div onclick="showMessageInfo('.$row["id"].')"  class="w-auto p-4 bg-gray-700 text-white font-semibold rounded-2xl h-auto shadow-xl self-start">
                         <p class="text-sm">'.$row["text"].'</p>
                     </div>
+                    <div id="ms'.$row["id"].'" style="display: none">'.$row["sendDate"].'</div>
                     </div>
                     
                     ';
@@ -167,7 +170,8 @@ function showMessagesWithGroup($receiverId,$senderId,$conn){
                 {
                     echo '
                     <div class="inline-flex items-center space-x-3 place-self-end"> <!-- prawa -->
-                    <div class="w-auto p-4 bg-purple-700 text-white font-semibold rounded-2xl h-auto shadow-xl self-start">
+                    <div id="ms'.$row["id"].'" style="display: none">'.$row["sendDate"].'</div>
+                    <div onclick="showMessageInfo('.$row["id"].')"  class="w-auto p-4 bg-purple-700 text-white font-semibold rounded-2xl h-auto shadow-xl self-start">
                         <p class="text-sm">'.$row["text"].'</p>
                     </div>
                     <img src="profPics/'.profPicPath($receiverId,$conn).'" alt="" class="w-8 h-8 self-start">
@@ -301,6 +305,19 @@ function showGroupCode($id,$conn){
                 }
             }   
         }
+}
+
+function userInfo($userId,$what,$conn){
+
+    $sql = "SELECT ".$what." FROM users WHERE id = '".$userId."'";
+
+    if($result = @$conn->query($sql)){
+        $howManyRows = $result->num_rows;
+        if($howManyRows>0){
+            $row = $result->fetch_assoc();
+            return $row[$what];
+        }   
+    }
 }
 
 

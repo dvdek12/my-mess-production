@@ -49,7 +49,7 @@
 </div>
 
 <div class="window" id="addGroup" style="height: 250px; width: 450px">
-    <img class="closeButton" src="assets/cross.png" onclick="closeWindow(this)">
+    <img class="closeButton" src="assets/cross.png" onclicgitk="closeWindow(this)">
     <form action="mymess.php" method="post" enctype="multipart/form-data">
         <input type="text" name="groupName" placeholder="nazwa grupy ..."><br/>
         <input type="file" name="file" id="file">
@@ -322,7 +322,7 @@
         }
 
         function changePhoto(){
-            if(document.getElementById("profPic").src == "http://localhost/mymess/public/profPics/user%20(1).png"){
+            if(document.getElementById("profPic").src == "http://localhost/mymess/my-mess-production/public/profPics/user%20(1).png"){
                 if(document.getElementById("changePhoto").style.display == "none")
                     document.getElementById("changePhoto").style.display = "block";
                 else
@@ -333,6 +333,14 @@
                 console.log(document.getElementById("profPic").src);
             }
             
+        }
+
+        function showMessageInfo(id){
+            if(document.getElementById("ms"+id).style.display == "none"){
+                document.getElementById("ms"+id).style.display = "block";
+            }else{
+                document.getElementById("ms"+id).style.display = "none";
+            }
         }
 
         new FgEmojiPicker({
