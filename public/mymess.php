@@ -106,18 +106,19 @@
                     </div>
 
                     <!-- Sekcja uzytkownikow i konwersacji DO AUTOMATYZACJI -->
-                    <div class="w-full h-5/6 bg-gray-700 relative">
+                    <div class="w-full h-5/6 bg-gray-700 relative" id="vue-app">
                         <div class="h-full z-10">
                             <div class="flex flex-col h-full items-center justify-center space-y-8 p-3 md:space-y-3">
                                 <div class="w-full p-1">
                                     <div class="addFriend" onclick="addFriend()">Dodaj przez kod</div>
-                                    <input type="text" class="focus:outline-none w-full  md:h-8 rounded-full p-3 text-white bg-gray-600" placeholder="Szukaj konwersacji... ">
+                                    <input v-model="search" type="text" class="focus:outline-none w-full  md:h-8 rounded-full p-3 text-white bg-gray-600" placeholder="Szukaj konwersacji... ">
                                     
                                 </div>
 
 
                                 <div id="convs" class="flex flex-col items-between p-5 space-y-6 md:space-y-4 h-full overflow-y-auto w-full bg-gray-800 rounded-2xl">
-
+                                    <conversation :conv="search"></conversation>
+                                    
                                     <?php
 
                                         if(isset($_POST["what"])){
@@ -355,5 +356,10 @@
     <script>var chatHistory = document.getElementById("messbody"); chatHistory.scrollTop = chatHistory.scrollHeight;</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha512-z4OUqw38qNLpn1libAN9BsoDx6nbNFio5lA6CuTp9NlK83b89hgyCVq+N5FdBJptINztxn1Z3SaKSKUS5UP60Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="main.js"></script>
+    
+    <!-- VUE FILES -->
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="vue-app.js"></script>
 </body>
 </html>
