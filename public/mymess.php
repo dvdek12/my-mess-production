@@ -31,7 +31,7 @@
 <body class="overflow-x-hidden" onload="JavaScript:timedRefresh(1000);">
 
   <!--                                   Okienka dodatkowe          -->
-<div class="window" id="addFriend">
+<div class="window z-50" id="addFriend">
     <img class="closeButton" src="assets/cross.png" onclick="closeWindow(this)">
     <form action="mymess.php" method="post">
         <input type="text" name="code" placeholder="kod ..."><br/>
@@ -39,7 +39,7 @@
     </form>
 </div>
 
-<div class="window" id="addGroup" style="height: 250px; width: 450px">
+<div class="window z-50" id="addGroup" style="height: 250px; width: 450px">
     <img class="closeButton" src="assets/cross.png" onclicgitk="closeWindow(this)">
     <form action="mymess.php" method="post" enctype="multipart/form-data">
         <input type="text" name="groupName" placeholder="nazwa grupy ..."><br/>
@@ -48,7 +48,7 @@
     </form>
 </div>
 
-<div class="window" id="changeName">
+<div class="window z-50" id="changeName">
     <img class="closeButton" src="assets/cross.png" onclick="closeWindow(this)">
     <form action="mymess.php" method="post">
         <input type="text" name="newName" placeholder="Nowa Nazwa ... "><br/>
@@ -108,7 +108,7 @@
                     <!-- Sekcja uzytkownikow i konwersacji DO AUTOMATYZACJI -->
                     <div class="w-full h-5/6 bg-gray-700 relative">
                         <div class="h-full z-10">
-                            <div class="flex flex-col items-center justify-center space-y-8 p-3 md:space-y-3">
+                            <div class="flex flex-col h-full items-center justify-center space-y-8 p-3 md:space-y-3">
                                 <div class="w-full p-1">
                                     <div class="addFriend" onclick="addFriend()">Dodaj przez kod</div>
                                     <input type="text" class="focus:outline-none w-full  md:h-8 rounded-full p-3 text-white bg-gray-600" placeholder="Szukaj konwersacji... ">
@@ -116,7 +116,7 @@
                                 </div>
 
 
-                                <div id="convs" class="flex flex-col items-between p-5 space-y-6 md:space-y-4" style="margin-left: -180px;">
+                                <div id="convs" class="flex flex-col items-between p-5 space-y-6 md:space-y-4 h-full overflow-y-auto w-full bg-gray-800 rounded-2xl">
 
                                     <?php
 
@@ -327,11 +327,17 @@
         }
 
         function showMessageInfo(id){
-            if(document.getElementById("ms"+id).style.display == "none"){
-                document.getElementById("ms"+id).style.display = "block";
-            }else{
-                document.getElementById("ms"+id).style.display = "none";
-            }
+            element = document.getElementById("ms" + id)
+
+            element.classList.toggle('-translate-x-full')
+            // if(element.classList.contains("hidden")){
+            //     element.classList.remove("hidden")
+            //     element.classList.add("block")
+            //     element.classList.remove("translate-y-full")
+            //     element.classList.add("-translate-y-full transition-all")
+            // }else{
+            //     element.classList.toggle("hidden");
+            // }
         }
 
         new FgEmojiPicker({

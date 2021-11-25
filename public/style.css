@@ -45,6 +45,10 @@
     margin-top: 20px;
   }
 
+  .window form input[type="text"] { 
+      width:10px;
+  }
+
   .closeButton{
     position: absolute;
     height: 20px;

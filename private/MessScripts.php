@@ -23,16 +23,24 @@ function showConversations($userId,$conn){
                             $name = $result1->fetch_assoc()["name"];
 
                             echo '
-                            <div class="flex flex-row space-x-4 items-center">
+                        <div class="flex flex-row space-x-4 items-center">
                                 <img src="profPics/'.profPicPath($id,$conn).'" alt="" class="w-8 h-8">
-                                <div class="p-1 w-64 md:w-auto h-12 rounded-lg
-                                    bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 ">
+                                <div style=" 
+                                background: rgb(91,88,138);
+                                background: linear-gradient(90deg, rgba(91,88,138,1) 4%, rgba(131,126,217,1) 18%, rgba(157,157,204,1) 41%, rgba(180,204,233,1) 64%, rgba(67,192,218,1) 84%, rgba(94,191,210,1) 96%); "
+                                    class="p-1 w-64 md:w-auto h-12 rounded-lg">
                                 <div class="bg-blue-400 h-full w-full rounded-md py-2 px-2 font-bold text-white ">
-                                <form action="mymess.php" method="post"><button name="what" value="'.$id.'">
-                                '.$name.'
-                                </button><input type="hidden" name="name" value="'.$name.'">';
+                                <form action="mymess.php" method="post">
+                                    <button class="text-gray-800 font-semibold" name="what" value="'.$id.'">
+                                        '.$name.'
+                                    </button>
+                                    
+                                    <input type="hidden" name="name" value="'.$name.'">';
                                 if($row["ifRead"]==0)echo ' <img src="assets/newMessage.png" alt="" class="w-8 h-8">';
-                               echo '</form></div></div></div>';
+                               echo '</form>
+                            </div>
+                        </div>
+                    </div>';
                         }
                     }
                 }
@@ -82,12 +90,21 @@ function showMessagesWithUser($receiverId,$senderId,$conn){
                     if($row["id_sender"]==$senderId){
 
                         echo '
-                        <div class="inline-flex items-center space-x-3">
-                        <img src="profPics/'.profPicPath($senderId,$conn).'" alt="" class="w-8 h-8 self-start">
-                        <div onclick="showMessageInfo('.$row["id"].')" class="w-auto p-4 bg-gray-700 text-white font-semibold rounded-2xl h-auto shadow-xl self-start">
-                            <p class="text-sm">'.$row["text"].'</p>
+                        <div class="inline-flex items-center space-x-3 cursor-pointer">
+                            <img src="profPics/'.profPicPath($senderId,$conn).'" alt="" class="w-8 h-8 self-start">
+                            <div class="inline-flex space-x-0 items-center">
+
+                                <div onclick="showMessageInfo('.$row["id"].')" class="z-40 w-auto p-4 bg-gray-700 text-white font-semibold rounded-2xl h-auto shadow-xl self-start">
+                                    <p class="text-sm">'.$row["text"].'</p>
+                                </div>
+
+                                <div class="text-gray-700 text-xs  transform ease-in-out duration-200 -translate-x-full " id="ms'.$row["id"].'">
+                                    '. substr($row["sendDate"], 10, 6) .'
+                                </div>
+
+                                
+
                             </div>
-                            <div id="ms'.$row["id"].'" style="display: none">'.$row["sendDate"].'</div>
                         </div>
                         ';
                         $last = "notYou";
@@ -95,12 +112,16 @@ function showMessagesWithUser($receiverId,$senderId,$conn){
                     else 
                     {
                         echo '
-                        <div class="inline-flex items-center space-x-3 place-self-end"> <!-- prawa -->
-                        <div id="ms'.$row["id"].'" style="display: none">'.$row["sendDate"].'</div>
-                        <div onclick="showMessageInfo('.$row["id"].')" class="w-auto p-4 bg-purple-700 text-white font-semibold rounded-2xl h-auto shadow-xl self-start">
-                            <p class="text-sm">'.$row["text"].'</p>
-                        </div>
-                        <img src="profPics/'.profPicPath($receiverId,$conn).'" alt="" class="w-8 h-8 self-start">
+                        <div class="inline-flex items-center space-x-3 place-self-end cursor-pointer"> <!-- prawa -->
+                            <div class="inline-flex space-x-0 items-center">
+                                <div id="ms'.$row["id"].'" class="text-gray-700 text-xs  transform ease-in-out duration-200 translate-x-full ">
+                                '.substr($row["sendDate"], 10, 6)   .'
+                                </div>
+                                <div onclick="showMessageInfo('.$row["id"].')" class="z-40 w-auto p-4 bg-purple-700 text-white font-semibold rounded-2xl h-auto shadow-xl self-start">
+                                    <p class="text-sm">'.$row["text"].'</p>
+                                </div>
+                            </div>
+                            <img src="profPics/'.profPicPath($receiverId,$conn).'" alt="" class="w-8 h-8 self-start">
                         </div>
                         ';
                         $last = "you";
