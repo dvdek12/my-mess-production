@@ -135,7 +135,6 @@ function showMessagesWithUser($receiverId,$senderId,$conn){
                 }
             }
         }
-        return $howManyRows;
 }
 
 function showMessagesWithGroup($receiverId,$senderId,$conn){
@@ -155,6 +154,7 @@ function showMessagesWithGroup($receiverId,$senderId,$conn){
                 if($row["id_sender"]!=$receiverId){
 
                     echo '
+                    <div class="inline-flex items-center space-x-3" style=": -50px">'.userInfo($row["id_sender"],"name",$conn).'</div>
                     <div class="inline-flex items-center space-x-3">
                     <img src="profPics/'.profPicPath($row["id_sender"],$conn).'" alt="" class="w-8 h-8 self-start">
                     <div onclick="showMessageInfo('.$row["id"].')"  class="w-auto p-4 bg-gray-700 text-white font-semibold rounded-2xl h-auto shadow-xl self-start">
@@ -182,7 +182,6 @@ function showMessagesWithGroup($receiverId,$senderId,$conn){
               }
         }
     }
-    return $howManyRows;
 }
 
 

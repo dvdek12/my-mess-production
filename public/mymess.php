@@ -18,14 +18,10 @@
     function timedRefresh(timeoutPeriod) {
     const xmlhttp = new XMLHttpRequest();
     xmlhttp.onload = function() {
-      document.getElementById("demo").innerHTML = this.responseText;
+      document.getElementById("conv").innerHTML = this.responseText;
     }
-    xmlhttp.open("GET", "../private/MessScripts.php");
+    xmlhttp.open("GET", "../private/refresh.php");
     xmlhttp.send();
-
-    if(document.getElementById("demo").innerHTML=="."){
-        location.reload();
-    }
 
     setTimeout("timedRefresh(1000)",timeoutPeriod);
 }
@@ -33,11 +29,6 @@
     
 </head>
 <body class="overflow-x-hidden" onload="JavaScript:timedRefresh(1000);">
-
-<!-- refresh nie dotykac -->
-<div id="demo"></div> 
-<!-- ******************* -->
-
 
   <!--                                   Okienka dodatkowe          -->
 <div class="window" id="addFriend">
@@ -125,7 +116,7 @@
                                 </div>
 
 
-                                <div class="flex flex-col items-between p-5 space-y-6 md:space-y-4" style="margin-left: -180px;">
+                                <div id="convs" class="flex flex-col items-between p-5 space-y-6 md:space-y-4" style="margin-left: -180px;">
 
                                     <?php
 
