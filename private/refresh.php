@@ -15,11 +15,13 @@ else
         $receiverId = $_SESSION["who"];
         $senderId = $_SESSION["userId"];
         $howMany = $_SESSION["howMany"];
-    }
-    else return false;
 
-    require "MessScripts.php";
-    showMessages($senderId,$receiverId,$conn);
+        require "MessScripts.php";
+        showMessages($senderId,$receiverId,$conn);
+    }
+    else {
+        return false;
+    }
 
 }
 

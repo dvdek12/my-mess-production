@@ -43,7 +43,7 @@
     xmlhttp2.open("GET", "../private/refreshConvs.php");
     xmlhttp2.send();
 
-    setTimeout("timedRefresh(6000)",timeoutPeriod);
+    setTimeout("timedRefresh2(6000)",timeoutPeriod);
     }
 </script>
     
@@ -60,7 +60,7 @@
 </div>
 
 <div class="window z-50" id="addGroup" style="height: 250px; width: 450px">
-    <img class="closeButton" src="assets/cross.png" onclicgitk="closeWindow(this)">
+    <img class="closeButton" src="assets/cross.png" onclick="closeWindow(this)">
     <form action="mymess.php" method="post" enctype="multipart/form-data">
         <input type="text" name="groupName" placeholder="nazwa grupy ..."><br/>
         <input type="file" name="file" id="file">
@@ -287,7 +287,12 @@
                             </form>
                             </div>
                         </div>
-                        <?php } ob_end_flush();?>
+                        <?php 
+                        }else
+                        {
+                            echo '<div id="conv"></div>';
+                        }
+                        ob_end_flush();?>
 
 
                     </div>
@@ -372,6 +377,6 @@
     <script>var chatHistory = document.getElementById("messbody"); chatHistory.scrollTop = chatHistory.scrollHeight;</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha512-z4OUqw38qNLpn1libAN9BsoDx6nbNFio5lA6CuTp9NlK83b89hgyCVq+N5FdBJptINztxn1Z3SaKSKUS5UP60Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="main.js"></script>
-
+    
 </body>
 </html>
