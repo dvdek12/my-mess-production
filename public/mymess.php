@@ -18,6 +18,12 @@
     <script src="fgEmojiPicker.js"></script>
     <script type="text/JavaScript">
 
+    function ajaxRefresh(){
+        setTimeout("timedRefresh(3000)",3000);
+        timedRefresh2(6000);
+    }
+
+
     function timedRefresh(timeoutPeriod) {
     const xmlhttp = new XMLHttpRequest();
     xmlhttp.onload = function() {
@@ -26,12 +32,23 @@
     xmlhttp.open("GET", "../private/refresh.php");
     xmlhttp.send();
 
-    setTimeout("timedRefresh(1000)",timeoutPeriod);
-}
+    setTimeout("timedRefresh(3000)",timeoutPeriod);
+    }
+
+    function timedRefresh2(timeoutPeriod) {
+    const xmlhttp2 = new XMLHttpRequest();
+    xmlhttp2.onload = function() {
+      document.getElementById("convs").innerHTML = this.responseText;
+    }
+    xmlhttp2.open("GET", "../private/refreshConvs.php");
+    xmlhttp2.send();
+
+    setTimeout("timedRefresh(6000)",timeoutPeriod);
+    }
 </script>
     
 </head>
-<body class="overflow-x-hidden" onload="JavaScript:timedRefresh(1000);">
+<body class="overflow-x-hidden" onload="JavaScript:ajaxRefresh();">
 
   <!--                                   Okienka dodatkowe          -->
 <div class="window z-50" id="addFriend">
@@ -146,8 +163,6 @@
                                                 addGroup($_POST["groupName"],$_FILES["file"],$conn);
                                             }
                                         }
-
-                                    showConversations($_SESSION["userId"],$conn);
 
                                     }
                                     ?>
