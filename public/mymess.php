@@ -1,4 +1,7 @@
-
+<?php
+    session_start();
+    ob_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -314,7 +317,7 @@
         }
 
         function changePhoto(){
-            if(document.getElementById("profPic").src == "http://localhost/mymess/my-mess-production/public/profPics/user%20(1).png"){
+            if(document.getElementById("profPic").src == "http://localhost/mymess/my-mess-production/public/profPics/user.png"){
                 if(document.getElementById("changePhoto").style.display == "none")
                     document.getElementById("changePhoto").style.display = "block";
                 else
@@ -356,10 +359,6 @@
     <script>var chatHistory = document.getElementById("messbody"); chatHistory.scrollTop = chatHistory.scrollHeight;</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha512-z4OUqw38qNLpn1libAN9BsoDx6nbNFio5lA6CuTp9NlK83b89hgyCVq+N5FdBJptINztxn1Z3SaKSKUS5UP60Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="main.js"></script>
-    
-    <!-- VUE FILES -->
-    
-    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-    <script src="vue-app.js"></script>
+
 </body>
 </html>

@@ -5,7 +5,8 @@ session_start();
     require "MessScripts.php";
 
     $conn1 = @new mysqli($host, $db_user, $db_password, $db_name);
-    
+    $conn1->set_charset('utf8mb4');
+
     if($conn1->connect_errno!=0){
         echo "Error: ".$conn1->connect_errno;
         return false;

@@ -1,9 +1,10 @@
 <?php
-session_start();
+    session_start();
+    ob_start();
 
     require_once "connect.php";
 
-    $basic = 'user (1).png';
+    $basic = 'user.png';
 
     $conn1 = @new mysqli($host, $db_user, $db_password, $db_name);
 

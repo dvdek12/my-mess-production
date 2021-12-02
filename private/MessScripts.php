@@ -301,6 +301,7 @@ function addGroup($name,$file,$conn){
             $name = $file["name"];
             move_uploaded_file($tmp_name, "../public/profPics/".$name);
             $newName=strval($row["id"]).$name;
+            if($newName == $row["id"]){$newName = "group.png";}
             rename("../public/profPics/".$name, "../public/profPics/".$newName);
             $sql = 'UPDATE users SET prof_pic = "'.$newName.'" WHERE id='.$row["id"].'';
             $conn -> query($sql);
@@ -308,6 +309,7 @@ function addGroup($name,$file,$conn){
         }
     }
 }
+
 
 function showGroupCode($id,$conn){
     

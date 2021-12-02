@@ -1,7 +1,15 @@
 <?php
-  session_start();
+    session_start();
+    ob_start();
+?>
 
-  if(isset($_SESSION["userId"])){
+<title>MyMess</title>
+<head><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2320255945489240"
+     crossorigin="anonymous"></script></head>
+
+<?php
+
+  if(isset($_SESSION["userId"])){ //check if logged in
     header("location: mymess.php");
   }
   else
@@ -26,15 +34,15 @@
 <script>
 document.getElementById("register").style.display = "none";
 
-function register(){
+function register(){ //showing register panel
   document.getElementById("register").style.display = "block";
 }
 
-<?php if(isset($_SESSION["error"])){ ?>
+<?php if(isset($_SESSION["error"])){ ?> //errors
   alert( <?php echo '"'.$_SESSION["error"].'"'; 
           unset($_SESSION["error"]);         ?>  );
 <?php } ?>
 
 </script>
 
-<?php } ?>
+<?php } ob_end_flush(); ?>

@@ -12,8 +12,6 @@ session_start();
 
     require_once "connect.php";
 
-    $basic = 'user (1).png';
-
     $conn1 = @new mysqli($host, $db_user, $db_password, $db_name);
 
     $sql = 'SELECT prof_pic FROM users WHERE id='.$_SESSION["userId"].'';
