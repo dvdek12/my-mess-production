@@ -69,8 +69,6 @@
 
 
     <?php                   // Zaladowanie potrzebnych rzeczy i bazy danych
-    ob_start();
-    session_start();
 
     if(!isset($_SESSION["userId"])){
         header("location: index.php");
