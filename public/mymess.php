@@ -319,7 +319,7 @@
         document.getElementById("changeName").style.display = "none";
 
                         //   ############################   Mobile Menu    #############################
-        if(screen.width<2000){mobileMenu();}
+        if(screen.width<1000){mobileMenu();}
 
         function mobileMenu() {
             <?php if(isset($_SESSION["who"])){?>
