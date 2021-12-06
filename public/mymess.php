@@ -18,8 +18,8 @@
     <script src="fgEmojiPicker.js"></script>
     <script type="text/JavaScript">
 
-    function ajaxRefresh(){
-        setTimeout("timedRefresh(3000)",3000);
+    function ajaxRefresh(){   // ###############  AJAX refresh  #################
+        //setTimeout("timedRefresh(3000)",3000);
         timedRefresh2(6000);
     }
 
@@ -76,7 +76,7 @@
     </form>
 </div>
 
-<div class="window" id="changePhoto" style="width: 450px">
+<div class="window z-50" id="changePhoto" style="width: 450px">
     <img class="closeButton" src="assets/cross.png" onclick="closeWindow(this)">
     <form action="../private/ChoosePhoto.php" method="post" enctype="multipart/form-data">
     <input type="file" name="file" id="file">
@@ -112,7 +112,7 @@
         <div class="flex flex-row w-full h-full ">
 
             <!-- Lewy Panel -->
-            <div class="w-1/4 h-full">
+            <div id="leftPanel" class="w-1/4 h-full">
                 <div class="flex flex-col w-full h-full">
 
                     <!-- logo section -->
@@ -128,7 +128,7 @@
                         <div class="h-full z-10">
                             <div class="flex flex-col h-full items-center justify-center space-y-8 p-3 md:space-y-3">
                                 <div class="w-full p-1">
-                                    <div class="addFriend" onclick="addFriend()">Dodaj przez kod</div>
+                                    <div class="addFriend" onclick="openWindow('addFriend')">Dodaj przez kod</div>
                                     <input v-model="search" type="text" class="focus:outline-none w-full  md:h-8 rounded-full p-3 text-white bg-gray-600" placeholder="Szukaj konwersacji... ">
                                     
                                 </div>
@@ -174,12 +174,12 @@
                         <!-- settigns slider -->
                         <div class="flex flex-col w-full absolute slider z-20" id="settingsSection">
                             <div class="w-full h-auto flex flex-col items-center p-5 bg-white  shadow-xl">
-                                <button class="focus:outline-none " onclick="changePhoto()">
+                                <button class="focus:outline-none " onclick="openWindow('changePhoto')">
                                     <img src="profPics/<?php echo profPicPath($_SESSION["userId"],$conn); ?>" alt="" class="w-32 h-32" id="profPic">
                                 </button>
                                 <div class="inline-flex space-x-3 items-baseline">
-                                    <p class="text-2xl font-bold text-gray-800" onclick="changeName()"><?php echo $_SESSION["userName"]; ?></p>
-                                    <i class="fas fa-edit" onclick="changeName()"></i>
+                                    <p class="text-2xl font-bold text-gray-800" onclick="openWindow('changeName')"><?php echo $_SESSION["userName"]; ?></p>
+                                    <i class="fas fa-edit" onclick="openWindow('changeName')"></i>
                                 </div>
                                 <p ><?php echo $_SESSION["userLogin"]; ?></p>
                             </div>
@@ -202,7 +202,7 @@
 
                                 <div class="inline-flex items-center space-x-3 text-white">
                                     <i class="fas fa-moon fa-2x"></i>
-                                    <p onclick="addGroup()" class="text-lg font-semibold">Stworz grupe</p>
+                                    <p onclick="openWindow('addGroup')" class="text-lg font-semibold">Stworz grupe</p>
                                 </div>
                             </div>
                         </div>
@@ -213,7 +213,7 @@
 
                     <!-- footer section -->
                     <div class="w-full bg-gray-800 text-white flex flex-row items-center justify-between md:justify-around px-2" style="height: 10%">
-                            <button class="focus:outline-none " onclick="changePhoto()">
+                            <button class="focus:outline-none " onclick="openWindow('changePhoto')">
                                 <img src="profPics/<?php echo profPicPath($_SESSION["userId"],$conn); ?>" alt="profile" class="w-6 h-6">
                             </button>
                             <div class="flex flex-col space-y-0 -ml-20">
@@ -231,7 +231,7 @@
 
 
             <!-- prawa kolumna -->
-            <div class="w-3/4 h-full bg-blue-300 bg-fixed" style="background-image: url('assets/slanted-gradient.svg');">
+            <div id="rightPanel" class="w-3/4 h-full bg-blue-300 bg-fixed" style="background-image: url('assets/slanted-gradient.svg');">
                 <!-- <p class="text-3xl font-bold text-white">Nie masz z nikim konwersacji :C</p> -->
                 <div class="w-full h-full flex justify-center items-center p-10 ">
                     <div class="w-full h-full rounded-2xl flex flex-col p-5 space-y-4">
@@ -263,7 +263,7 @@
                         
                          <!-- KONWERSACJA DO AUTOMATYZACJI POZNIEJ -->
                         <div id ="messbody" class="w-full h-full bg-red-200 p-3 rounded-2xl overflow-auto">
-                            <div id="conv" class="grid grid-rows-4 gap-y-6">
+                            <div id="conv" class="grid grid-rows-1 gap-y-6">
 
                                 <?php 
                                 $_SESSION["howMany"] = showMessages($_SESSION["userId"],$_SESSION["who"],$conn); 
@@ -276,12 +276,21 @@
                          <!-- DOLNY PANEL KONWERSACJI  -->
                         <div class="w-full h-32 bg-gray-800 rounded-2xl">
                             <div class="flex flex-row items-center justify-between p-5">
-                            <form action="../private/Sending.php" method="POST">
+                            <form action="../private/Sending.php" method="POST" enctype="multipart/form-data">
                                 <div class="inline-flex items-center text-white space-x-3"> 
+
                                     <input id="textArea1" type="text" autocomplete="off" name="text" class="focus:outline-none w-32 md:w-64 h-12 lg:w-96 rounded-full p-3 text-black" placeholder="Wyślij wiadomość...">
-                                    <i class="fas fa-images fa-2x hover:text-blue-600"></i>
-                                    <i class="fas fa-file-alt fa-2x hover:text-blue-600"></i>
+                                        
+                                        <label for="file-upload" class="custom-file-upload">
+                                            <i class="fas fa-images fa-2x hover:text-blue-600"></i>
+                                        </label><input id="file-upload" class="file-upload-style" type="file" name="pic">
+
+                                        <label for="file-upload2" class="custom-file-upload">
+                                            <i class="fas fa-file-alt fa-2x hover:text-blue-600"></i>
+                                        </label><input id="file-upload2" class="file-upload-style" type="file" name="file">
+
                                     <x id="emojiButton" class="fas fa-laugh-squint fa-2x hover:text-blue-600"></x>
+
                                     <button name="sending"><i class="fas fa-paper-plane fa-2x text-white hover:text-blue-600"></i></button>
                                 </div>
                             </form>
@@ -309,67 +318,19 @@
         document.getElementById("changePhoto").style.display = "none";
         document.getElementById("changeName").style.display = "none";
 
-        function closeWindow(element){
-            element.parentElement.style.display = "none";
+                        //   ############################   Mobile Menu    #############################
+        if(screen.width<1000){mobileMenu();}
+
+        function mobileMenu() {
+            <?php if(isset($_SESSION["who"])){?>
+                document.getElementById("leftPanel").style.display = "none";
+                document.getElementById("rightPanel").style.width = "100%";
+                document.getElementById("rightPanelPadding").style.padding = "1px";
+            <?php }else{ ?>
+                document.getElementById("rightPanel").style.display = "none";
+                document.getElementById("leftPanel").style.width = "100%";
+            <?php }?>
         }
-
-        function addFriend(){
-            if(document.getElementById("addFriend").style.display == "none")
-                document.getElementById("addFriend").style.display = "block";
-            else
-                document.getElementById("addFriend").style.display = "none";
-        }
-
-        function changeName(){
-            if(document.getElementById("changeName").style.display == "none")
-                document.getElementById("changeName").style.display = "block";
-            else
-                document.getElementById("changeName").style.display = "none";
-        }
-
-        function addGroup(){
-            if(document.getElementById("addGroup").style.display == "none")
-                document.getElementById("addGroup").style.display = "block";
-            else
-                document.getElementById("addGroup").style.display = "none";
-        }
-
-        function changePhoto(){
-            if(document.getElementById("profPic").src == "http://localhost/mymess/my-mess-production/public/profPics/user.png"){
-                if(document.getElementById("changePhoto").style.display == "none")
-                    document.getElementById("changePhoto").style.display = "block";
-                else
-                    document.getElementById("changePhoto").style.display = "none";
-            }
-            else{  
-                location.href = "../private/returnToBasic.php";   
-                console.log(document.getElementById("profPic").src);
-            }
-            
-        }
-
-        function showMessageInfo(id){
-            element = document.getElementById("ms" + id)
-
-            element.classList.toggle('-translate-x-full')
-            // if(element.classList.contains("hidden")){
-            //     element.classList.remove("hidden")
-            //     element.classList.add("block")
-            //     element.classList.remove("translate-y-full")
-            //     element.classList.add("-translate-y-full transition-all")
-            // }else{
-            //     element.classList.toggle("hidden");
-            // }
-        }
-
-        new FgEmojiPicker({
-            trigger: ['x', 'textArea1'],
-            position: ['top', 'right'],
-            emit(obj, triggerElement) {
-            const emoji = obj.emoji;
-            document.getElementById('textArea1').value += emoji;
-            }
-        });
 
 
     </script>
