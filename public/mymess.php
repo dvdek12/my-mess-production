@@ -19,7 +19,7 @@
     <script type="text/JavaScript">
 
     function ajaxRefresh(){   // ###############  AJAX refresh  #################
-        //setTimeout("timedRefresh(3000)",3000);
+        setTimeout("timedRefresh(3000)",3000);
         timedRefresh2(6000);
     }
 
@@ -233,7 +233,7 @@
             <!-- prawa kolumna -->
             <div id="rightPanel" class="w-3/4 h-full bg-blue-300 bg-fixed" style="background-image: url('assets/slanted-gradient.svg');">
                 <!-- <p class="text-3xl font-bold text-white">Nie masz z nikim konwersacji :C</p> -->
-                <div class="w-full h-full flex justify-center items-center p-10 ">
+                <div id="mobileConvSize" class="w-full h-full flex justify-center items-center p-10 ">
                     <div class="w-full h-full rounded-2xl flex flex-col p-5 space-y-4">
 
                          <!-- PANEL GÓRNY KONWERACJI  -->
@@ -319,12 +319,13 @@
         document.getElementById("changeName").style.display = "none";
 
                         //   ############################   Mobile Menu    #############################
-        if(screen.width<1000){mobileMenu();}
+        if(screen.width<2000){mobileMenu();}
 
         function mobileMenu() {
             <?php if(isset($_SESSION["who"])){?>
                 document.getElementById("leftPanel").style.display = "none";
                 document.getElementById("rightPanel").style.width = "100%";
+                document.getElementById("mobileConvSize").style.padding = "0.5rem";
                 document.getElementById("rightPanelPadding").style.padding = "1px";
             <?php }else{ ?>
                 document.getElementById("rightPanel").style.display = "none";
